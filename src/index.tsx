@@ -21,22 +21,24 @@ const MyApp: React.FC = () => {
   );
 
   const handleAddTask = useCallback(() => {
-    setTasks([
-      ...tasks,
-      {
-        id: Crypto.randomUUID(),
-        title: taskTitle,
-        done: false,
-      },
-    ]);
-
+    setTasks(
+      [
+        ...tasks,
+        {
+          id: Crypto.randomUUID(),
+          title: taskTitle,
+          done: false,
+          createdAt: new Date(),
+        },
+      ].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    );
     setTaskTitle('');
-  }, [taskTitle, tasks]);
+  }, [taskTitle]);
 
   const handleToggleTaskDone = useCallback(
     (id: string) => {
-      setTasks((prevState) =>
-        prevState.map((task) => {
+      setTasks((prevState) => {
+        const updatedTasks = prevState.map((task) => {
           if (task.id === id) {
             return {
               ...task,
@@ -44,8 +46,13 @@ const MyApp: React.FC = () => {
             };
           }
           return task;
-        })
-      );
+        });
+
+        const tasksNotDone = updatedTasks.filter((task) => !task.done);
+        const tasksDone = updatedTasks.filter((task) => task.done);
+
+        return [...tasksNotDone, ...tasksDone];
+      });
     },
     [tasks]
   );

@@ -40,7 +40,7 @@ export const Row = styled.View`
 export const TextInfo = styled.Text<TTextProps>`
   ${({ theme, purple }) => `
     font-family: ${theme.fonts.InterBold};
-    font-size: ${theme.fontSize.md};
+    font-size: ${theme.fontSize.md}px;
     color: ${purple ? theme.product.purple : theme.product.blue};
   `}
 `;
