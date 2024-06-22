@@ -1,13 +1,11 @@
-import { StyleSheet } from 'react-native';
-import theme from '../../styles/theme';
+import styled from 'styled-components/native';
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: theme.base.gray700,
-    height: 173,
-    justifyContent: 'center',
-    width: '100%',
-  },
-});
-export default styles;
+export const Container = styled.View`
+  ${({ theme }) => `
+		align-items: center;
+		background-color: ${theme.base.gray700};
+		height: 173px;
+		justify-content: center;
+		width: 100%;
+`}
+`;

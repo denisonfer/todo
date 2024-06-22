@@ -1,22 +1,21 @@
-import { StyleSheet } from 'react-native';
-import theme from '../../styles/theme';
+import styled from 'styled-components/native';
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.base.gray400,
-    borderRadius: 999,
-    color: theme.base.gray200,
-    fontFamily: theme.fonts.InterBold,
-    fontSize: theme.fontSize.sm,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    marginLeft: 8,
-  },
-  text: {
-    color: theme.base.gray200,
-    fontFamily: theme.fonts.InterBold,
-    fontSize: theme.fontSize.sm,
-  },
-});
+export const Container = styled.View`
+  ${({ theme }) => `
+		background-color: ${theme.base.gray400};
+		border-radius: 999px;
+		color: ${theme.base.gray200};
+		font-family: ${theme.fonts.InterBold};
+		font-size: ${theme.fontSize.sm}px;
+		padding: 2px 8px;
+		margin-left: 8px;
+`}
+`;
 
-export default styles;
+export const Text = styled.Text`
+  ${({ theme }) => `
+		color: ${theme.base.gray200};
+		font-family: ${theme.fonts.InterBold};
+		font-size: ${theme.fontSize.sm}px;
+`}
+`;

@@ -6,7 +6,9 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
+import { ThemeProvider } from 'styled-components';
 import MyApp from './src';
+import theme from './src/styles/theme';
 
 export default function App() {
   let [fontsLoaded, fontError] = useFonts({
@@ -19,10 +21,12 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <StatusBar style='light' />
-      <MyApp />
-    </View>
+    <ThemeProvider theme={theme}>
+      <View style={styles.container}>
+        <StatusBar style='light' />
+        <MyApp />
+      </View>
+    </ThemeProvider>
   );
 }
 

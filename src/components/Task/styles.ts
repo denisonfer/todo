@@ -1,33 +1,41 @@
-import { StyleSheet } from 'react-native';
-import theme from '../../styles/theme';
+import Checkbox from 'expo-checkbox';
+import styled from 'styled-components/native';
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 8,
-    height: 64,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    marginBottom: 8,
-    backgroundColor: theme.base.gray500,
-    justifyContent: 'space-between',
-  },
-  checkBox: {
-    borderRadius: 999,
-  },
-  title: {
-    flex: 1,
-    fontFamily: theme.fonts.Inter,
-    fontSize: theme.fontSize.md,
-    marginHorizontal: 8,
-  },
-  button: {
-    alignItems: 'center',
-    height: 52,
-    justifyContent: 'center',
-    width: 52,
-  },
-});
+type TTitleProps = {
+  done: boolean;
+};
 
-export default styles;
+export const Container = styled.View`
+  ${({ theme }) => `
+  flex-direction: row;
+  align-items: center;
+  border-radius: 8px;
+  height: 64px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  background-color: ${theme.base.gray500};
+  justify-content: space-between;
+`}
+`;
+
+export const Check = styled(Checkbox)`
+  border-radius: 999px;
+`;
+
+export const Title = styled.Text<TTitleProps>`
+  ${({ theme, done }) => `
+		flex: 1;
+		font-family: ${theme.fonts.Inter};
+		font-size: ${theme.fontSize.md}px;
+		margin: 0 8px;
+		text-decoration-line: ${done ? 'line-through' : 'none'};
+		color: ${done ? theme.base.gray300 : theme.base.gray100};
+	`}
+`;
+
+export const Button = styled.TouchableOpacity`
+  align-items: center;
+  height: 52px;
+  justify-content: center;
+  width: 52px;
+`;

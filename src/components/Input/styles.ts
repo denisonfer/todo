@@ -1,16 +1,17 @@
-import { StyleSheet } from 'react-native';
-import theme from '../../styles/theme';
+import styled from 'styled-components/native';
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.base.gray500,
-    borderRadius: 8,
-    color: theme.base.gray100,
-    fontFamily: theme.fonts.Inter,
-    fontSize: theme.fontSize.lg,
-    height: 54,
-    paddingHorizontal: 16,
-    width: '70%',
-  },
-});
-export default styles;
+export const Input = styled.TextInput.attrs(({ theme }) => ({
+  placeholderTextColor: theme.base.gray300,
+}))`
+  ${({ theme }) => `
+		background-color: ${theme.base.gray500};
+		border-radius: 8px;
+		color: ${theme.base.gray100};
+		font-family: ${theme.fonts.Inter};
+		font-size: ${theme.fontSize.lg}px;
+		height: 54px;
+		padding: 0 16px;
+		width: 70%;
+		
+`}
+`;

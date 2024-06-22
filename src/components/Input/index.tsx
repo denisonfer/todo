@@ -1,7 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { TextInput } from 'react-native';
-import theme from '../../styles/theme';
-import styles from './styles';
+import * as S from './styles';
 
 type TProps = {
   value: string;
@@ -10,12 +8,10 @@ type TProps = {
 
 const Input: React.FC<TProps> = ({ value, onChangeText }) => {
   return (
-    <TextInput
+    <S.Input
       value={value}
       onChangeText={onChangeText}
       placeholder='Adicione uma nova tarefa'
-      placeholderTextColor={theme.base.gray300}
-      style={styles.container}
     />
   );
 };

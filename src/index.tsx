@@ -1,13 +1,6 @@
 import IconFeather from '@expo/vector-icons/Feather';
 import React, { useCallback } from 'react';
-import {
-  Alert,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Alert } from 'react-native';
 
 import * as Crypto from 'expo-crypto';
 import BadgeQuantity from './components/BadgeQuantity';
@@ -15,6 +8,7 @@ import Header from './components/Header';
 import Input from './components/Input';
 import Task from './components/Task';
 import { TTask } from './shared/interfaces/TTask';
+import * as S from './styles';
 import theme from './styles/theme';
 
 const MyApp: React.FC = () => {
@@ -79,38 +73,33 @@ const MyApp: React.FC = () => {
   );
 
   return (
-    <View>
+    <>
       <Header />
 
-      <View style={styles.rowInput}>
+      <S.RowAction>
         <Input value={taskTitle} onChangeText={setTaskTitle} />
-        <TouchableOpacity style={styles.button} onPress={handleAddTask}>
+        <S.ButtonAddTask onPress={handleAddTask} disabled={taskTitle === ''}>
           <IconFeather
             name='plus-circle'
             color={theme.base.gray100}
             size={22}
           />
-        </TouchableOpacity>
-      </View>
+        </S.ButtonAddTask>
+      </S.RowAction>
 
-      <View style={styles.rowInfo}>
-        <View style={styles.row}>
-          <Text style={styles.textInfo}>Criadas</Text>
+      <S.RowInfo>
+        <S.Row>
+          <S.TextInfo>Criadas</S.TextInfo>
           <BadgeQuantity quantity={tasks.length} />
-        </View>
+        </S.Row>
 
-        <View style={styles.row}>
-          <Text style={[styles.textInfo, { color: theme.product.purple }]}>
-            Concluídas
-          </Text>
+        <S.Row>
+          <S.TextInfo purple>Concluídas</S.TextInfo>
           <BadgeQuantity quantity={tasksCompletedQuantity} />
-        </View>
-      </View>
+        </S.Row>
+      </S.RowInfo>
 
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.containerTasks}
-      >
+      <S.Scroll showsVerticalScrollIndicator={false}>
         {tasks.map((task) => (
           <Task
             key={task.id}
@@ -119,53 +108,9 @@ const MyApp: React.FC = () => {
             onRemoveTask={handleRemoveTask}
           />
         ))}
-      </ScrollView>
-    </View>
+      </S.Scroll>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#191919',
-  },
-  rowInput: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: -32,
-    marginBottom: 32,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  button: {
-    alignItems: 'center',
-    backgroundColor: theme.product.blueDark,
-    height: 52,
-    justifyContent: 'center',
-    marginLeft: 4,
-    borderRadius: 8,
-    width: 52,
-  },
-  rowInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-    paddingHorizontal: 24,
-  },
-  textInfo: {
-    fontFamily: theme.fonts.InterBold,
-    fontSize: theme.fontSize.md,
-    color: theme.product.blue,
-  },
-
-  containerTasks: {
-    flexGrow: 1,
-    paddingHorizontal: 24,
-  },
-});
 
 export default MyApp;
