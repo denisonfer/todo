@@ -1,8 +1,8 @@
 import IconFeather from '@expo/vector-icons/Feather';
 import React from 'react';
 
-import { TTask } from '../../shared/interfaces/TTask';
-import theme from '../../styles/theme';
+import { TTask } from '@shared/interfaces/TTask';
+import theme from '@styles/theme';
 import * as S from './styles';
 
 type TProps = {
@@ -20,7 +20,7 @@ const Task: React.FC<TProps> = ({ task, onToggleTaskDone, onRemoveTask }) => {
       />
       <S.Title done={task.done}>{task.title}</S.Title>
       <S.Button onPress={() => onRemoveTask(task.id)}>
-        <IconFeather name='trash-2' size={18} color={theme.base.gray300} />
+        <IconFeather name="trash-2" size={18} color={theme.base.gray300} />
       </S.Button>
     </S.Container>
   );

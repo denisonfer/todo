@@ -1,23 +1,23 @@
 import IconFeather from '@expo/vector-icons/Feather';
+import * as Crypto from 'expo-crypto';
 import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 
-import * as Crypto from 'expo-crypto';
-import BadgeQuantity from './components/BadgeQuantity';
-import Header from './components/Header';
-import Input from './components/Input';
-import Task from './components/Task';
-import { TTask } from './shared/interfaces/TTask';
+import BadgeQuantity from '@components/BadgeQuantity';
+import Header from '@components/Header';
+import Input from '@components/Input';
+import Task from '@components/Task';
+import { TTask } from '@shared/interfaces/TTask';
+import theme from '@styles/theme';
 import * as S from './styles';
-import theme from './styles/theme';
 
 const MyApp: React.FC = () => {
   const [tasks, setTasks] = React.useState<TTask[]>([]);
   const [taskTitle, setTaskTitle] = React.useState('');
 
   const tasksCompletedQuantity = React.useMemo(
-    () => tasks.filter((task) => task.done).length,
-    [tasks]
+    () => tasks.filter(task => task.done).length,
+    [tasks],
   );
 
   const handleAddTask = useCallback(() => {
@@ -30,15 +30,15 @@ const MyApp: React.FC = () => {
           done: false,
           createdAt: new Date(),
         },
-      ].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      ].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()),
     );
     setTaskTitle('');
   }, [taskTitle]);
 
   const handleToggleTaskDone = useCallback(
     (id: string) => {
-      setTasks((prevState) => {
-        const updatedTasks = prevState.map((task) => {
+      setTasks(prevState => {
+        const updatedTasks = prevState.map(task => {
           if (task.id === id) {
             return {
               ...task,
@@ -48,13 +48,13 @@ const MyApp: React.FC = () => {
           return task;
         });
 
-        const tasksNotDone = updatedTasks.filter((task) => !task.done);
-        const tasksDone = updatedTasks.filter((task) => task.done);
+        const tasksNotDone = updatedTasks.filter(task => !task.done);
+        const tasksDone = updatedTasks.filter(task => task.done);
 
         return [...tasksNotDone, ...tasksDone];
       });
     },
-    [tasks]
+    [tasks],
   );
 
   const handleRemoveTask = useCallback(
@@ -70,13 +70,13 @@ const MyApp: React.FC = () => {
           {
             text: 'Remover',
             onPress: () => {
-              setTasks(tasks.filter((task) => task.id !== id));
+              setTasks(tasks.filter(task => task.id !== id));
             },
           },
-        ]
+        ],
       );
     },
-    [tasks]
+    [tasks],
   );
 
   return (
@@ -87,7 +87,7 @@ const MyApp: React.FC = () => {
         <Input value={taskTitle} onChangeText={setTaskTitle} />
         <S.ButtonAddTask onPress={handleAddTask} disabled={taskTitle === ''}>
           <IconFeather
-            name='plus-circle'
+            name="plus-circle"
             color={theme.base.gray100}
             size={22}
           />
@@ -107,7 +107,7 @@ const MyApp: React.FC = () => {
       </S.RowInfo>
 
       <S.Scroll showsVerticalScrollIndicator={false}>
-        {tasks.map((task) => (
+        {tasks.map(task => (
           <Task
             key={task.id}
             task={task}

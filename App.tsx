@@ -3,12 +3,11 @@ import {
   Inter_700Bold,
   useFonts,
 } from '@expo-google-fonts/inter';
-import { StatusBar } from 'expo-status-bar';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
 
+import theme from '@styles/theme';
 import { ThemeProvider } from 'styled-components';
 import MyApp from './src';
-import theme from './src/styles/theme';
 
 export default function App() {
   let [fontsLoaded, fontError] = useFonts({
@@ -23,7 +22,11 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <View style={styles.container}>
-        <StatusBar style='light' />
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="transparent"
+          translucent
+        />
         <MyApp />
       </View>
     </ThemeProvider>
