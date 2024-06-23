@@ -37,6 +37,9 @@ ToDo é um aplicativo móvel desenvolvido com React Native que permite aos usuá
 
 4. Use o aplicativo Expo Go no seu dispositivo móvel ou um emulador para visualizar o aplicativo.
 
-# Preview
+## Preview
+![Preview do App](https://github.com/denisonfer/todo/blob/main/assets/iScreen%20Shoter%20-%2020240623155040477.jpg)
+
+
 
 
